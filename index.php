@@ -5,20 +5,22 @@
 <div class="container-fluid">
   <div class="media-container-row">
 <?php while ( have_posts() ) : the_post(); ?>
-<?php static $count = 0; if ($count == "3") { break; } else { ?>
+<?php static $count = 0; if ($count == " ".get_option('web_entradas_pa')." ") { break; } else { ?>
     <div class="card p-3 col-12 col-md-6 col-lg-4">
       <div class="card-wrapper">
         <div class="card-img">
           <?php if ( has_post_thumbnail() ) { ?>
             <a href="<?php the_permalink(); ?>"><img src="<?php echo atrib_imagen_destacada(); ?>" alt=""></a>
           <?php } else { ?>
-            <a href="<?php the_permalink(); ?>"><img src="<?php bloginfo('template_url'); ?>/assets/images/imgdes.png" alt=""></a>
+            <a href="<?php the_permalink(); ?>"><img src="<?php echo get_option('web_entradas_id'); ?>" alt=""></a>
           <?php } ?>
         </div>
-        <div class="card-box">
-          <h4 class="card-title pb-3 mbr-fonts-style display-5"><?php lim_title($post->post_title, 40); ?></h4>
-          <p class="mbr-text mbr-fonts-style display-7">
+        <div class="card-box" style="background-color: <?php echo get_option('web_entradas_ct'); ?>;">
+          <h4 class="card-title pb-3 mbr-fonts-style display-5" style="color: <?php echo get_option('web_entradas_cp'); ?>;"><?php lim_title($post->post_title, 40); ?></h4>
+          <p class="mbr-text mbr-fonts-style display-7" style="color: <?php echo get_option('web_entradas_cp'); ?>;">
+            <span class="mbri-arrow-next"></span>
             <time datatime="<?php the_time('Y-m-j'); ?>"><?php the_time('j F, Y'); ?></time>
+            <span class="mbri-arrow-next"></span>
           </p>
         </div>
       </div>

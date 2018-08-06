@@ -80,7 +80,7 @@ if ( ! empty( $title ) )
         <textarea type="text" class="form-control" name="message" rows="7" data-form-field="Message" id="message-form1-2q"></textarea>
       </div>
       <span class="input-group-btn">
-        <button href="" type="submit" name="btns_cont" class="btn btn-form <?php echo $cbtnp; ?> display-4">
+        <button href="inicio.php" type="submit" name="btns_cont" class="btn btn-form <?php echo $cbtnp; ?> display-4">
           <span class="<?php echo $ibtnp; ?> mbr-iconfont mbr-iconfont-btn"></span>
           <?php echo $tbtnp; ?>
       </button>
@@ -113,13 +113,13 @@ $padbo = $instance[ 'padbo' ];
 }
 else {
 $title = __( 'CONTÁCTENOS', 'wpb_widget_domain' );
-$ctitl = __( '#149dcc', 'wpb_widget_domain' );
+$ctitl = __( '#ffffff', 'wpb_widget_domain' );
 $subti = __( 'Formulario de contacto con integración en el servidor', 'wpb_widget_domain' );
-$csubt = __( '#767676', 'wpb_widget_domain' );
-$bacol = __( '#efefef', 'wpb_widget_domain' );
+$csubt = __( '#ffffff', 'wpb_widget_domain' );
+$bacol = __( '#4c4c4c', 'wpb_widget_domain' );
 $baopa = __( '0.9', 'wpb_widget_domain' );
 $tbtnp = __( 'ENVIAR', 'wpb_widget_domain' );
-$cbtnp = __( 'btn-black', 'wpb_widget_domain' );
+$cbtnp = __( 'btn-success', 'wpb_widget_domain' );
 $ibtnp = __( 'mbri-letter', 'wpb_widget_domain' );
 $padto = __( '90px', 'wpb_widget_domain' );
 $padbo = __( '90px', 'wpb_widget_domain' );

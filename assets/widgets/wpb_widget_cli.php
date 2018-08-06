@@ -138,7 +138,7 @@ else {
 $title = __( 'NUESTROS CLIENTES', 'wpb_widget_domain' );
 $ctitl = __( '#149dcc', 'wpb_widget_domain' );
 $subti = __( 'Presentación tipo slider. Puede cambiar fácilmente los parámetros del Widget.', 'wpb_widget_domain' );
-$csubt = __( '#149dcc', 'wpb_widget_domain' );
+$csubt = __( '#3d3d3d', 'wpb_widget_domain' );
 $cclie = __( '4', 'wpb_widget_domain' );
 $bacol = __( '#efefef', 'wpb_widget_domain' );
 $baopa = __( '0.9', 'wpb_widget_domain' );
@@ -211,8 +211,8 @@ echo '<option value="' . esc_attr( $key ) . '" id="' . esc_attr( $key ) . '" '. 
 <input class="wcolorp" id="<?php echo $this->get_field_id( 'ctitl' ); ?>" name="<?php echo $this->get_field_name( 'ctitl' ); ?>" type="text" value="<?php echo esc_attr( $ctitl ); ?>" />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id( 'subti' ); ?>"><?php _e( 'Sub Título:' ); ?></label> 
-<input class="widefat" id="<?php echo $this->get_field_id( 'subti' ); ?>" name="<?php echo $this->get_field_name( 'subti' ); ?>" type="text" value="<?php echo esc_attr( $subti ); ?>" />
+<label for="<?php echo esc_attr( $this->get_field_id( 'subti' ) ); ?>"><?php _e( 'Sub Título:' ); ?></label>
+<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'subti' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'subti' ) ); ?>"><?php echo wp_kses_post( $subti ); ?></textarea>
 <small><?php _e( 'Dejelo en blanco si no quiere mostrarlo...' ); ?></small>
 </p>
 <p>

@@ -141,30 +141,31 @@ dbDelta($sql);
 add_action('wp', 'tabla_contacto');
 
 //* Insetar Datos Formulario Contacto
-/*
-if (isset($_POST['btns_cont'])) {
 
-echo $_POST['btns_cont'];
+//if (isset($_POST['btns_cont'])) {
+
+$name = $_POST['name'];
+$email = $_POST['email'];
+$phone = $_POST['phone'];
+$message = $_POST['message'];
 
 function insertar_wpdb(){
 global $wpdb;
-$wpdb->insert( 'wp_contacto', 
+$wpdb->insert( 'wp_contacto',
   array( 
-      'name' => 'Alain Milian', 
-      'email' => 'amilianm@yahoo.es',
-      'phone' => '04166185504',
-      'message' => 'Hola Mundo'
+      'name' => $name, 
+      'email' => $email,
+      'phone' => $phone,
+      'message' => $message
   )
 );
-}
+//}
 
 }
 // Ejecutamos nuestro funcion en WordPress
 add_action('wp', 'insertar_wpdb');
-*/
 
 //* Crear Función para Mostrar un Sub Menú Administrativo
-
 function ayuda_function() {
   add_theme_page('Ayuda', 'Ayuda', 'manage_options', 'ayuda', 'sub_menu_panel');
   //add_menu_page('Ayuda', 'Ayuda', 'manage_options', 'ayuda', 'sub_menu_panel');
@@ -175,6 +176,31 @@ function sub_menu_panel() {
   wp_die( __('No tiene suficiente permiso para acceder a esta página.') );
  }
 ?>
+
+<div id="welcome-panel" class="welcome-panel">
+  <h2>¡Bienvenido al Thema WEB Bootstrap 4!</h2>
+  <p class="about-description">Hemos creado algunos enlaces para que puedas comenzar:</p>
+  <div class="welcome-panel-column-container">
+  <div class="welcome-panel-column">
+    <h3>Ayudanos a mantener el Proyecto</h3>
+    <a class="button button-primary button-hero" href="https://www.paypal.me/amilianm">Donar via Paypal</a>
+  </div>
+  <div class="welcome-panel-column">
+    <h3>Descargas y Actualzaciones</h3>
+    <ul>
+      <li><a href="https://github.com/amilianm/wp-theme-web" class="welcome-icon dashicons-cloud">Descaga el Tema de Github</a></li>
+      <li><a href="#" class="welcome-icon welcome-add-page">Añade una página Sobre mí</a></li>
+     </ul>
+  </div>
+  <div class="welcome-panel-column welcome-panel-last">
+    <h3>Más acciones</h3>
+    <ul>
+      <li><a href="#" class="welcome-icon welcome-comments">Activa o desactiva los comentarios</a></li>
+      <li><a href="#" class="welcome-icon welcome-learn-more">Aprende más de cómo comenzar</a></li>
+    </ul>
+  </div>
+  </div>
+</div>
 
 <div class="wrap">
   <img src="<?php bloginfo('template_url'); ?>/assets/images/logo.png"/>
@@ -295,6 +321,83 @@ function ajustes_tema( $wp_customize ) {
     'type' => 'checkbox',
     'priority' => 1,
   ));
+
+  // Ajustes de las Entradas
+  $wp_customize->add_section( 'entradas_section' , array(
+    'title' => __( 'Ajustes de las Entradas', 'web' ),
+    'panel' => 'web_opciones_tema',
+    'priority' => 4,
+    'capability' => 'edit_theme_options',
+  ));
+
+  //Ajustes de las Entradas - Paginación
+  $wp_customize->add_setting( 'web_entradas_pa', array(
+    'default' => '3',
+    'type' => 'option',
+    'capability' => 'edit_theme_options',
+  ));
+
+  $wp_customize->add_control( 'text_entradas_pa', array(
+    'label' => __('Tu portada muestra', 'web'),
+    'section' => 'entradas_section',
+    'settings' => 'web_entradas_pa',
+    'type' => 'radio',
+    'priority' => 1,
+    'description' => 'Muestra la Cantidad de Entradas/Publicaciones por Página',
+    'choices' => array(
+      '1' => '1 Entrada',
+      '2' => '2 Entradas',
+      '3' => '3 Entradas',
+    ),
+  ));
+
+  //Ajustes de las Entradas - Color de la Tarjeta
+  $wp_customize->add_setting( 'web_entradas_ct', array(
+    'default' => '#149dcc',
+    'type' => 'option',
+    'capability' => 'edit_theme_options',
+  ));
+ 
+  $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color_ct', array(
+      'label' => __( 'Color de la Tarjeta', 'web' ),
+      'section' => 'entradas_section',
+      'settings' => 'web_entradas_ct',
+      'description' => 'Muestra el Color de fondo de la Tarjeta',
+      'priority' => 2,
+    )) 
+  );
+
+  //Ajustes de las Entradas - Color del Título
+  $wp_customize->add_setting( 'web_entradas_cp', array(
+    'default' => '#ffffff',
+    'type' => 'option',
+    'capability' => 'edit_theme_options',
+  ));
+ 
+  $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'link_color_cp', array(
+      'label' => __( 'Color del Título', 'web' ),
+      'section' => 'entradas_section',
+      'settings' => 'web_entradas_cp',
+      'description' => 'Muestra el Color del Título de la entrada',
+      'priority' => 3,
+    )) 
+  );
+
+  //Ajustes de las Entradas - Imágen Destacada 
+  $wp_customize->add_setting( 'web_entradas_id', array(
+    'default' => get_bloginfo('template_directory') . '/assets/images/imgdes.png',
+    'type' => 'option',
+    'capability' => 'edit_theme_options',
+  ));
+ 
+  $wp_customize->add_control( new WP_Customize_Image_Control($wp_customize, 'image_entradas_upload', array(
+      'label' => __('Imagen Destacada', 'web'),
+      'section' => 'entradas_section',
+      'settings' => 'web_entradas_id',
+      'description' => 'Seleccione la Imagen por defecto, que saldrá si la imágen destacada no se adjunta',
+      'priority' => 4,
+    ))
+  );
 
 }
 
